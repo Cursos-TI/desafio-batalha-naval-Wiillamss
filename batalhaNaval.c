@@ -4,115 +4,108 @@
 
 #include <stdio.h>
 
-#define TAMANHO_TABULEIRO 10
-#define TAMANHO_NAVIO 3
+#define TABULEIRO 10
 
 int main()
 {
 
-    char colunas[TAMANHO_TABULEIRO] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
-    int linhas[TAMANHO_TABULEIRO] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    int tabuleiro[TAMANHO_TABULEIRO][TAMANHO_TABULEIRO];
+    char colunas[10] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
+    int linhas[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int tabuleiro[TABULEIRO][TABULEIRO] = {0};
+    int cruz[TABULEIRO][TABULEIRO] = {0};
+    int octaedro[TABULEIRO][TABULEIRO] = {0};
+    int cone[TABULEIRO][TABULEIRO] = {0};
 
-    // Inicializando o tabuleiro
-
-    for (int i = 0; i < TAMANHO_TABULEIRO; i++)
+    //  Fazendo o Loop para Posicionando a Cruz
+    for (int i = 0; i < TABULEIRO; i++)
     {
-        for (int j = 0; j < TAMANHO_TABULEIRO; j++)
+        for (int j = 0; j < TABULEIRO; j++)
         {
-            tabuleiro[i][j] = 0;
-        }
-    }
-
-    // Posicionando o navio na Horizontal
-    int linha_navio1_1 = 5;
-    int coluna_navio1_1 = 3;
-    tabuleiro[linha_navio1_1][coluna_navio1_1] = TAMANHO_NAVIO;
-
-    int linha_navio1_2 = 5;
-    int coluna_navio1_2 = 4;
-    tabuleiro[linha_navio1_2][coluna_navio1_2] = TAMANHO_NAVIO;
-
-    int linha_navio1_3 = 5;
-    int coluna_navio1_3 = 5;
-    tabuleiro[linha_navio1_3][coluna_navio1_3] = TAMANHO_NAVIO;
-
-    // Posicionando o navio na vertical
-    int linha_navio2_1 = 1;
-    int coluna_navio2_1 = 1;
-    tabuleiro[linha_navio2_1][coluna_navio2_1] = TAMANHO_NAVIO;
-
-    int linha_navio2_2 = 2;
-    int coluna_navio2_2 = 1;
-    tabuleiro[linha_navio2_2][coluna_navio2_2] = TAMANHO_NAVIO;
-
-    int linha_navio2_3 = 3;
-    int coluna_navio2_3 = 1;
-    tabuleiro[linha_navio2_3][coluna_navio2_3] = TAMANHO_NAVIO;
-
-    // Posicionando o terceiro navio na diagonal
-    int linha_navio3_1 = 1;
-    int coluna_navio3_1 = 3;
-    tabuleiro[linha_navio3_1][coluna_navio3_1] = TAMANHO_NAVIO;
-
-    int linha_navio3_2 = 2;
-    int coluna_navio3_2 = 4;
-    tabuleiro[linha_navio3_2][coluna_navio3_2] = TAMANHO_NAVIO;
-
-    int linha_navio3_3 = 3;
-    int coluna_navio3_3 = 5;
-    tabuleiro[linha_navio3_3][coluna_navio3_3] = TAMANHO_NAVIO;
-
-    // Posicionando o quarto navio na diagonal
-    int linha_navio4_1 = 6;
-    int coluna_navio4_1 = 2;
-    tabuleiro[linha_navio4_1][coluna_navio4_1] = TAMANHO_NAVIO;
-
-    int linha_navio4_2 = 7;
-    int coluna_navio4_2 = 3;
-    tabuleiro[linha_navio4_2][coluna_navio4_2] = TAMANHO_NAVIO;
-
-    int linha_navio4_3 = 8;
-    int coluna_navio4_3 = 4;
-    tabuleiro[linha_navio4_3][coluna_navio4_3] = TAMANHO_NAVIO;
-
-    // Posicionando o quinto navio na diagonal
-    int linha_navio5_1 = 1;
-    int coluna_navio5_1 = 9;
-    tabuleiro[linha_navio5_1][coluna_navio5_1] = TAMANHO_NAVIO;
-
-    int linha_navio5_2 = 2;
-    int coluna_navio5_2 = 8;
-    tabuleiro[linha_navio5_2][coluna_navio5_2] = TAMANHO_NAVIO;
-
-    int linha_navio5_3 = 3;
-    int coluna_navio5_3 = 7;
-    tabuleiro[linha_navio5_3][coluna_navio5_3] = TAMANHO_NAVIO;
-
-    printf("  *** Tabuleiro Batalha Naval ***\n");
-
-    printf("   "); // Fazendo o loop para exibir o cabeçalho
-    for (int j = 0; j < TAMANHO_TABULEIRO; j++)
-    {
-        printf("  %c", colunas[j]);
-    }
-    printf("\n"); // Fazendo o loop para exibir as linhas e o tabuleiro
-    for (int i = 0; i < TAMANHO_TABULEIRO; i++)
-    {
-        printf(" %2d ", linhas[i]);
-        for (int j = 0; j < TAMANHO_TABULEIRO; j++)
-        {
-            if (tabuleiro[i][j] == TAMANHO_NAVIO)
+            if ((i == 0 && j == 5) || (i == 1 && j == 5) ||
+                (i == 3 && j == 5) || (i == 4 && j == 5) ||
+                (i == 2 && j == 3) || (i == 2 && j == 4) ||
+                (i == 2 && j == 5) || (i == 2 && j == 6) ||
+                (i == 2 && j == 7))
             {
-                printf(" 3 ");
+                cruz[i][j] = 1;
             }
             else
             {
-                printf(" 0 ");
+                cruz[i][j] = 0;
+            }
+        }
+    }
+
+    // Fazendo o Loop para Posicionando o Octaedro
+    for (int i = 0; i < TABULEIRO; i++)
+    {
+        for (int j = 0; j < TABULEIRO; j++)
+        {
+            if ((i == 7 && j == 1) || (i == 8 && j == 0) ||
+                (i == 8 && j == 1) || (i == 8 && j == 2) ||
+                (i == 9 && j == 1))
+            {
+                octaedro[i][j] = 2;
+            }
+            else
+            {
+                octaedro[i][j] = 0;
+            }
+        }
+    }
+
+    // Fazendo o Loop para Posicionando o Cone
+    for (int i = 0; i < TABULEIRO; i++)
+    {
+        for (int j = 0; j < TABULEIRO; j++)
+        {
+            if ((i == 6 && j == 6) || (i == 7 && j == 5) ||
+                (i == 7 && j == 6) || (i == 7 && j == 7) ||
+                (i == 8 && j == 4) || (i == 8 && j == 5) ||
+                (i == 8 && j == 6) || (i == 8 && j == 7) ||
+                (i == 8 && j == 8))
+            {
+                cone[i][j] = 5;
+            }
+            else
+            {
+                cone[i][j] = 0;
+            }
+        }
+    }
+
+    // Loops realizados para exibir as linhas e colunas
+    printf("    *** Áreas de Efeito ***\n *** Tabuleiro Batalha Naval ***\n");
+    printf("\n");
+    printf("  ");
+    for (int j = 0; j < TABULEIRO; j++)
+    {
+        printf(" %c", colunas[j]);
+    }
+    printf("\n");
+    for (int i = 0; i < TABULEIRO; i++)
+    {
+        printf("%2d", linhas[i]);
+        for (int j = 0; j < TABULEIRO; j++)
+        {
+            if (cruz[i][j] == 1)
+            {
+                printf(" %d", cruz[i][j]); // Exibindo a Cruz no Tabuleiro
+            }
+            else if (octaedro[i][j] == 2)
+            {
+                printf(" %d", octaedro[i][j]); // Exibindo o Octaedro no Tabuleiro
+            }
+            else if (cone[i][j] == 5)
+            {
+                printf(" %d", cone[i][j]); // Exibindo o Cone no Tabuleiro
+            }
+            else
+            {
+                printf(" %d", tabuleiro[i][j]); // Exibindo o tabuleiro se o espaço vazio for 0
             }
         }
         printf("\n");
     }
-
     return 0;
 }
